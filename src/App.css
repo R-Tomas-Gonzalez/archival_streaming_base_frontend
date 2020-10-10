@@ -1,38 +1,179 @@
+
+/* Main App Background / Global Styling */
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App-background {
+  width: 100%;
+  height: 100vh;
+  color: #fff;
+  background: linear-gradient(-45deg, #cff5ff, #64b2cd, #2e94b6, #267793, #1c586c);
+  background-size: 200%, 200%;
+  position: fixed;
+  animation: change 15s ease-out infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes change {
+  0%{
+    background-position: 0 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0 50%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* login styling and container */
+
+.login-container-1 {
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+}
+
+.login-container-2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.login-container-3 {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  max-width:855px;
+}
+
+.user-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  padding: 40px;
+}
+
+.login-container-3:empty {
+  display: none;
+}
+
+.user-row:empty {
+  display: none;
+}
+
+
+
+/* User Box and Container */
+.user-box {
+  min-width: 239px;
+  height: 239px;
+  padding: 40px;
+  background: rgb(150, 191, 206);
+  border-radius: 5px;
+  margin: 16px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.303);
+}
+
+.user-box-container:hover {
+  transform: translate3D(0,-1px,0) scale(1.1);
+  transition: all .4s ease; /* zoom in */
+}
+
+.user-text {
+  margin-top: 20px;
+}
+
+
+/* Registration Container and Boxes */
+
+.registration-container {
+  margin-right: 25px;
+}
+
+.registration-circle {
+  display:flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 160px;
+  height: 160px;
+  padding: 40px;
+  border-radius: 50%;
+  background: rgb(150, 191, 206);
+  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.303);
 }
 
-.App-link {
-  color: #61dafb;
+.registration-container:hover {
+  transform: translate3D(0,-1px,0) scale(1.1);
+  transition: all .4s ease; /* zoom in */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.registration-icon {
+  margin-left: 20px;
+}
+
+.new-user-text {
+  margin-top: 20px;
+}
+
+
+/* For user and registration styling... Takes out hyperlink colors */
+
+.link-styling {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Registration Form */
+
+.form-container {
+  margin: 25vh;
+}
+
+input[type=email] {
+  padding: 10px;
+  margin:15px;
+  width: 250px;
+
+  border: 1px solid #575757;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+input[type=text] {
+  padding: 10px;
+  margin:15px;
+  width: 250px;
+
+  border: 1px solid #575757;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+input[type=password] {
+  padding: 10px;
+  margin: 15px;
+  margin-bottom: 10px;
+  width: 250px;
+
+  border: 1px solid #575757;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.auth-button {
+  align-items: center;
+  margin-top: 15px;
+  padding:7px;
+  width: 275px;
+  
+  background: #03ffaf9a 0% 0% no-repeat padding-box;
+  border: 1px solid #575757;
+  border-radius: 4px;
+  opacity: 1;
 }

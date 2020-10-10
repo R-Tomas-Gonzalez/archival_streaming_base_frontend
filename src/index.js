@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from '../src/App';
 import * as serviceWorker from './serviceWorker';
+import './fonts/Moon-Light.otf'
+import './fonts/Moon2.0-Light.otf'
+import './fonts/Moon2.0-Regular.otf'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+    <App />,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
