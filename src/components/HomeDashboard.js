@@ -4,7 +4,10 @@ class HomeDashboard extends Component {
     state = {  }
     render() { 
         return ( 
-            <div>Dashboard</div>
+            <div>
+                <h1>Dashboard</h1>
+                <h2>Status: {this.props.loggedInStatus}</h2>
+            </div>
          );
     }
 }
