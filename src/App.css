@@ -1,19 +1,22 @@
 
 /* Main App Background / Global Styling */
 
-.App {
-  text-align: center;
-}
-
 .App-background {
   width: 100%;
-  height: 100vh;
+  min-height: 100%;
   color: #fff;
   background: linear-gradient(-45deg, #cff5ff, #64b2cd, #2e94b6, #267793, #1c586c);
-  background-size: 200%, 200%;
-  position: fixed;
-  animation: change 15s ease-out infinite;
+  position: absolute;
+  /* background-size: 400%, 400%;
+  animation: change 15s ease-out infinite; */
 }
+
+.wrapper {
+  width: 100%;
+  max-width: 1050px;
+  margin: 75px auto 75px auto;
+}
+
 
 @keyframes change {
   0%{
@@ -30,17 +33,18 @@
 /* login styling and container */
 
 .login-container-1 {
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 65vh;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  /* position: relative; */
+  /* min-height: 65vh; */
 }
 
-.login-container-2 {
+.login-container-2 {  
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -48,7 +52,7 @@
   display: flex;
   align-items: center;
   overflow: visible;
-  max-width:855px;
+  max-width: 745px;
 }
 
 .user-row {
@@ -62,22 +66,23 @@
   display: none;
 }
 
-.user-row:empty {
-  display: none;
+/* User Box and Container */
+
+
+.user-box-container{
+  text-align: center;
+  cursor: pointer;
 }
 
-
-
-/* User Box and Container */
 .user-box {
-  min-width: 239px;
-  height: 239px;
+  width: 200px;
+  height: 200px;
   padding: 40px;
-  background: rgb(150, 191, 206);
+  background: rgba(255, 255, 255, 0.256);
   border-radius: 5px;
   margin: 16px;
   box-sizing: border-box;
-  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.303);
+  box-shadow: 0 8px 6px -6px rgba(255, 255, 255, 0.344);
 }
 
 .user-box-container:hover {
@@ -87,25 +92,29 @@
 
 .user-text {
   margin-top: 20px;
+  font-family: Moonlight;
+  font-size: 24px;
 }
 
 
 /* Registration Container and Boxes */
 
 .registration-container {
+  margin-top: 16px;
   margin-right: 25px;
+  text-align: center;
 }
 
 .registration-circle {
   display:flex;
   align-items: center;
   justify-content: center;
-  width: 160px;
-  height: 160px;
+  width: 121px;
+  height: 121px;
   padding: 40px;
   border-radius: 50%;
-  background: rgb(150, 191, 206);
-  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.303);
+  background: rgba(255, 255, 255, 0.256);
+  box-shadow: 0 8px 6px -6px rgba(255, 255, 255, 0.344);
 }
 
 .registration-container:hover {
@@ -119,8 +128,9 @@
 
 .new-user-text {
   margin-top: 20px;
+  font-family: Moonlight;
+  font-size: 24px;
 }
-
 
 /* For user and registration styling... Takes out hyperlink colors */
 
@@ -132,48 +142,242 @@
 /* Registration Form */
 
 .form-container {
-  margin: 25vh;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+}
+
+.registration-form {
+  margin: auto;
+  width: 300px;
+  border-radius: 4px;
+  background: #edfbff5a;
+
+  box-shadow: 0 0 50px 5px rgba(255, 255, 255, 0.344);
 }
 
 input[type=email] {
   padding: 10px;
-  margin:15px;
+  margin: 0px 15px 15px 15px;
   width: 250px;
+  color: white;
+  font-size: 18px;
 
-  border: 1px solid #575757;
-  border-radius: 4px;
-  opacity: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid #fff;
 }
 
 input[type=text] {
   padding: 10px;
   margin:15px;
   width: 250px;
+  color: white;
+  font-size: 18px;
 
-  border: 1px solid #575757;
-  border-radius: 4px;
-  opacity: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid #fff;
 }
 
 input[type=password] {
   padding: 10px;
   margin: 15px;
-  margin-bottom: 10px;
   width: 250px;
+  color: white;
+  font-size: 18px;
 
-  border: 1px solid #575757;
-  border-radius: 4px;
-  opacity: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid #fff;
 }
 
 .auth-button {
+  padding: 10px;
+  margin: 20px 15px 15px 15px;
+  width: 272px;
   align-items: center;
-  margin-top: 15px;
-  padding:7px;
-  width: 275px;
+  color: white;
+  font-family: Moonlight;
   
-  background: #03ffaf9a 0% 0% no-repeat padding-box;
+  background: #0b4c5b;
   border: 1px solid #575757;
   border-radius: 4px;
   opacity: 1;
+  cursor: pointer;
+}
+
+.register-welcome-message {
+  padding: 8px;
+  margin: 15px 15px 10px 15px;
+  font-family: Moonlight;
+  text-align: left;
+  font-size: 18px;
+  color: white;
+}
+
+.go-home-link {
+  padding: 10px;
+  margin: 0px 15px 10px 15px;
+  font-family: Moonlight;
+  text-align: center;
+}
+
+/* NavBar */
+
+.middle-links {
+  display: flex;
+  margin: 0 auto;
+  font-size: 30px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 0px;
+  font-family: Moonlight;
+}
+
+.main-nav li {
+  list-style: none;
+  text-align: center;
+}
+
+.main-nav a {
+  color: white;
+  margin: 15px 30px;
+  text-decoration: none;
+}
+
+/* Card Containers */
+
+.main-container {
+  margin-bottom: 50px;
+}
+
+.game-container{
+  font-family: Moonlight;
+}
+
+.photo-container {
+  font-family: Moonlight;
+}
+
+.movie-container {
+  font-family: Moonlight;
+}
+
+.card-row { 
+  display: flex;
+  flex-wrap: nowrap; 
+  overflow: auto;
+  border-radius: 7px;
+  padding: 12px;
+
+  background: rgba(255, 255, 255, 0.256)
+}
+
+
+
+/* Cards */
+
+.modal-image {
+  border-radius: 7px;
+}
+
+.photo-ui-card {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.photo-ui-card:hover {
+  transform: translate3D(0,-1px,0) scale(1.1);
+  transition: all .4s ease; /* zoom in */
+}
+
+.game-ui-card {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.game-ui-card:hover {
+  transform: translate3D(0,-1px,0) scale(1.1);
+  transition: all .4s ease; /* zoom in */
+}
+
+.ui-card {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.ui-card:hover {
+  transform: translate3D(0,-1px,0) scale(1.1);
+  transition: all .4s ease; /* zoom in */
+}
+
+.image {
+  border-radius: 7px;
+  box-shadow: 0 8px 6px -6px rgba(255, 255, 255, 0.509)
+}
+
+.card-title {
+  font-family: Moonlight;
+  font-size: .85em;
+  font-weight: bold;
+}
+
+
+/* Modal Styling */
+
+.overlay-styles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .7); 
+  z-index: 1000;
+}
+
+.modal-styles {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 25px;
+  z-index: 1000;
+  color: black;
+  border-radius: 7px;
+  text-align: center;
+  font-family: Moonlight;
+}
+
+.registration-modal-styles {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #267793;
+  padding: 25px;
+  z-index: 1000;
+  color: black;
+  border-radius: 7px;
+  text-align: center;
+  font-family: Moonlight;
+}
+
+.modal-button {
+    position: absolute;
+    border-radius: 7px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background: rgb(0, 124, 177);
+    color: rgb(255, 255, 255);
+    top: -10px;
+    right: -10px;
 }
