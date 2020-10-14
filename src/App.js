@@ -1,15 +1,17 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/RegistrationPage'
-import HomeDashboard from './components/HomeDashboard';
 import axios from 'axios';
+import MainUserPage from './pages/MainUserPage';
+import Modal from 'react-modal'
+import RegistrationComponent from './auth/RegistrationComponent';
 
+Modal.setAppElement('#root')
 class App extends PureComponent {
   state = { 
     loggedInStatus: "NOT_LOGGED_IN",
-    user: {}
+    user: {},
   }
 
   componentDidMount = () => {
@@ -47,7 +49,7 @@ class App extends PureComponent {
       })
   }
 
-  render() { 
+  render() {
     return ( 
       <div className="App-background">
         <div className="App">
@@ -62,13 +64,13 @@ class App extends PureComponent {
             <Route 
             exact 
             path={"/registration"} 
-            render={props=>(<RegistrationPage {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+            render={props=>(<RegistrationComponent {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
               )}
             />
             <Route 
             exact 
-            path={"/home-dashboard"} 
-            render={props=>(<HomeDashboard {...props} loggedInStatus={this.state.loggedInStatus} />
+            path={"/main-page"} 
+            render={props=>(<MainUserPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} movies={this.state.movies}/>
               )}
             />
           </Switch>

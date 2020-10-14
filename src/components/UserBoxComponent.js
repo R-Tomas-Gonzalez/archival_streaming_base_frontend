@@ -7,10 +7,7 @@ import { HiOutlineUser } from 'react-icons/hi';
 class UserBoxComponent extends Component {
     state = {}
 
-
     handleChange = (userInfo) => {
-
-        console.log(userInfo)
         axios.post("http://localhost:3001/sessions", {
             user: {
                 email: userInfo.email
@@ -18,7 +15,7 @@ class UserBoxComponent extends Component {
         },
         { withCredentials: true }
         )
-        .then(response => { console.log(response.data)
+        .then(response => {
             if (response.data.logged_in){
                 this.props.handleSuccessfulAuth(response.data);
             }

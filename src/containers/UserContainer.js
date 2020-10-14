@@ -1,11 +1,9 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import UserBoxComponent from '../components/UserBoxComponent';
 
 class UserContainer extends PureComponent {
     state = {  }
-
-   
-
+    
     render() { 
         const users = this.props.userInfo
         return (

@@ -1,17 +1,16 @@
 // Important functionality
-import React, { Component, PureComponent } from 'react';
-import {BrowserRouter, Switch, Route, NavLink} from "react-router-dom";
-import axios from 'axios';
+import React, { Fragment, PureComponent } from 'react';
 import { HiOutlineUserAdd } from 'react-icons/hi';
+import RegistrationModal from '../components/RegistrationModal'
+import RegistrationComponent from '../auth/RegistrationComponent'
 
 // Pages 
-import Login from '../auth/Login';
 import UserContainer from '../containers/UserContainer'
-
 
 class Home extends PureComponent {
     state = { 
-        users: []
+        users: [],
+        isOpen: false,
      }
 
     componentDidMount = () => {
@@ -24,48 +23,39 @@ class Home extends PureComponent {
         .then(users => {this.setState({users})
         })
     }
-
-    handleLogoutClick = () => {
-        axios.delete("http://localhost:3001/logout", {withCredentials: true})
-        .then(r => {this.props.handleLogout();})
-        .catch(error => {
-            console.log("logout error", error)
-        })
-    }
     
-
     handleSuccessfulAuth = (data) => {
         this.props.handleLogin(data);
-        this.props.history.push("/")
+        this.props.history.push("/main-page")
     }
 
     render() {
         return ( 
-            <div>
-                <h1>Home</h1>
-                <h2>Status: {this.props.loggedInStatus} as {this.props.currentUser.name} </h2>
+            <Fragment>
                 <div className="login-container-1">
-                    
                     <div className="login-container-2">
-                        <NavLink to="/registration" className="link-styling">
-                            <div className="registration-container">
-                                <div className="registration-circle">
-                                    <div className="registration-icon">
-                                        <HiOutlineUserAdd size="7em" />
-                                    </div>
+                        <div className="registration-container" onClick={() => this.setState({isOpen: true })}>
+                            <div className="registration-circle">
+                                <div className="registration-icon">
+                                    <HiOutlineUserAdd size="7em" />
                                 </div>
-                                <div className="new-user-text">NEW USER</div>
                             </div>
-                        </NavLink>
-                        {this.state.users.length ? <div className="login-container-3">
-                            <UserContainer userInfo={this.state.users} handleSuccessfulAuth={this.handleSuccessfulAuth}/>
-                        </div> : null }
+                            <div className="new-user-text">NEW USER</div>
+                        </div>
+                    <RegistrationModal open={this.state.isOpen} onClose={() => this.setState({isOpen: false})}>
+                        <RegistrationComponent to="/" handleSuccessfulAuth={this.handleSuccessfulAuth} onClick={() => this.setState({isOpen: false})}/>
+                    </RegistrationModal>
                         
-                        
+                        {this.state.users.length ? 
+                        <Fragment>
+                            <div className="login-container-3">
+                                <UserContainer userInfo={this.state.users} handleSuccessfulAuth={this.handleSuccessfulAuth} />
+                            </div> 
+                        </Fragment>
+                        : null }
                     </div>
                 </div>
-            </div>
-            
+            </Fragment>
          );
     }
 }
