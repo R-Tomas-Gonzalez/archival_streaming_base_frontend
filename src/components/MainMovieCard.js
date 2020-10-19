@@ -9,6 +9,7 @@ const MainMovieCard = (props) => {
     const title = props.movie.original_title
     const img = `https://image.tmdb.org/t/p/w300/${props.movie.poster_path}`
     const regImg = `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
+    
     return (  
         <div className="column">
             <div className="ui-card" onClick={()=>setIsOpen(true)}>
