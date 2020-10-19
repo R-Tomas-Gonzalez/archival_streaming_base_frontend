@@ -1,21 +1,56 @@
 import React, { PureComponent } from 'react';
 import './App.css';
+import Unsplash from 'unsplash-js';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import axios from 'axios';
 import MainUserPage from './pages/MainUserPage';
 import Modal from 'react-modal'
 import RegistrationComponent from './auth/RegistrationComponent';
+import GamesPage from './pages/GamesPage';
+import MoviesPage from './pages/MoviesPage';
+import ImagesPage from './pages/ImagesPage';
 
 Modal.setAppElement('#root')
+
+const movieAPI = process.env.REACT_APP_MOVIE_KEY
+const unsplashAPIKey = process.env.REACT_APP_UNSPLASH_KEY
+const unsplashAPISecret = process.env.REACT_APP_UNSPLASH_SECRET
+
+const unsplash = new Unsplash({
+    accessKey: unsplashAPIKey,
+    secret: unsplashAPISecret
+})
+
 class App extends PureComponent {
   state = { 
     loggedInStatus: "NOT_LOGGED_IN",
     user: {},
+    movies: [],
+    games: [],
+    photos: []
   }
 
   componentDidMount = () => {
     this.checkLoginStatus()
+
+    Promise.all([
+      fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${movieAPI}`),
+      fetch("https://api.rawg.io/api/games?platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated"),
+      unsplash.photos.listPhotos( 1, 20,)
+      ])
+      .then(function (responses){
+      return Promise.all(responses.map(function(response){
+          return response.json();
+      }));
+      })
+      .then(data => {
+      this.setState({
+          movies: data[0].results,
+          games: data[1].results,
+          photos: data[2]
+      })
+    })
   }
 
   handleLogout = () => {
@@ -70,8 +105,27 @@ class App extends PureComponent {
             <Route 
             exact 
             path={"/main-page"} 
-            render={props=>(<MainUserPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} movies={this.state.movies}/>
+            render={props=>(<MainUserPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} 
+              movies={this.state.movies} games={this.state.games} photos={this.state.photos}/>
               )}
+            />
+            <Route
+            exact
+            path={"/movies"}
+            render={props=>(<MoviesPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} movies={this.state.movies}/>
+            )}
+            />
+            <Route
+            exact
+            path={"/games"}
+            render={props=>(<GamesPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} games={this.state.games}/>
+            )}
+            />
+            <Route
+            exact
+            path={"/images"}
+            render={props=>(<ImagesPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} photos={this.state.photos}/>
+            )}
             />
           </Switch>
           </BrowserRouter>

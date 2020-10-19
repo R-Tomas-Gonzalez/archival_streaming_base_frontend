@@ -43,7 +43,7 @@ class Home extends PureComponent {
                             <div className="new-user-text">NEW USER</div>
                         </div>
                     <RegistrationModal open={this.state.isOpen} onClose={() => this.setState({isOpen: false})}>
-                        <RegistrationComponent to="/" handleSuccessfulAuth={this.handleSuccessfulAuth} onClick={() => this.setState({isOpen: false})}/>
+                        <RegistrationComponent to="/" onClick={() => this.setState({isOpen: false})} handleSuccessfulAuth={this.handleSuccessfulAuth}/>
                     </RegistrationModal>
                         
                         {this.state.users.length ? 
