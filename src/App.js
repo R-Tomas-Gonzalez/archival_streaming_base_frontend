@@ -37,7 +37,7 @@ class App extends PureComponent {
     Promise.all([
       fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${movieAPI}`),
       fetch("https://api.rawg.io/api/games?platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated"),
-      unsplash.photos.listPhotos( 1, 20,)
+      unsplash.photos.listPhotos( 1, 20)
       ])
       .then(function (responses){
       return Promise.all(responses.map(function(response){
@@ -118,7 +118,7 @@ class App extends PureComponent {
             <Route
             exact
             path={"/games"}
-            render={props=>(<GamesPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} games={this.state.games}/>
+            render={props=>(<GamesPage {...props} currentUser={this.state.user} handleLogout={this.handleLogout} games={this.state.games} game={this.state.games[0]}/>
             )}
             />
             <Route

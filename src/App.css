@@ -240,7 +240,6 @@ input[type=password] {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-inline-start: 0px;
   font-family: Moonlight;
 }
 
@@ -379,6 +378,7 @@ input[type=password] {
 }
 
 .game-ui-card {
+  position: relative;
   margin: 10px;
   cursor: pointer;
 }
@@ -476,6 +476,7 @@ input[type=password] {
   background: no-repeat;
   background-color: black;
   border-radius: 7px;
+  min-height: 600px;
   /* justify-content: flex-end; */
 }
 
@@ -512,12 +513,27 @@ input[type=password] {
   align-self: center;
 }
 
+.game-preview-details {
+  position: absolute;
+  border-radius: 7px;
+  padding: 40px;
+  font-family: MoonLight;
+  align-self: flex-end;
+}
+
 .preview-card-image {
   border-radius: 7px;
   margin-right: 40px;
 }
 
+.preview-card-video {
+  position: relative;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+
 .title-release {
+  position: relative;
   align-self: flex-end;
 }
 
@@ -558,11 +574,179 @@ input[type=password] {
 }
 
 .ui-faves-card {
+  position: relative;
   margin: 10px;
   cursor: pointer;
+  max-width: fit-content;
+}
+
+.ui-faves-card:hover {
+  transform: translate3D(0,-1px,0) scale(1.1);
+  transition: all .4s ease; /* zoom in */
 }
 
 .faves-image {
   border-radius: 7px;
   box-shadow: 0 8px 6px -6px rgba(255, 255, 255, 0.509)
 }
+
+.user-faves-card-row {
+  display: flex;
+  flex-wrap: nowrap;
+  max-height: fit-content;
+  overflow: auto;
+  border-radius: 7px;
+  padding: 22px 12px 12px 12px;
+  background: rgba(255, 255, 255, 0.256)
+}
+
+.delete-user-fave-btn {
+  position: absolute;
+  border-radius: 7px;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  background: rgba(0, 124, 177, 0.564);
+  color: rgb(255, 255, 255);
+  top: -10px;
+  right: -10px;
+}
+
+.add-faves-btn {
+  position: absolute;
+  border-radius: 7px;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  background: rgba(0, 124, 177, 0.564);
+  color: rgb(255, 255, 255);
+  top: -10px;
+  right: -10px;
+}
+
+.add-faves-btn-preview {
+  position: relative;
+  border-radius: 7px;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  background: rgb(0, 124, 177);
+  color: rgb(255, 255, 255);
+}
+
+/* Tooltips */
+.add-faves-btn-preview::before,
+.add-faves-btn-preview::after {
+  --scale: 0;
+  --tooltip-color: orange;
+  --arrow-size: 10px;
+  position:absolute;
+  content: "";
+  left: 50%;
+  top: .25rem;
+  transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+  transition: 100ms transform;
+  transform-origin: top center;
+}
+
+.add-faves-btn-preview::before {
+  --translate-y: calc(100% + var(--arrow-size));
+  content: attr(data-text);
+  font-family: moonlight;
+  padding: .5rem;
+  border-radius: 7px;
+  width: max-content;
+  background: var(--tooltip-color);
+}
+
+.add-faves-btn-preview:hover::before,
+.add-faves-btn-preview:hover::after {
+  --scale: 1;
+}
+
+.add-faves-btn-preview:after {
+  --translate-y: calc(2.3 * var(--arrow-size));
+  content: '';
+  border: var(--arrow-size) solid transparent;
+  border-bottom-color: var(--tooltip-color);
+  transform-origin: bottom center;
+}
+/*  */
+.add-faves-btn::before,
+.add-faves-btn::after {
+  --scale: 0;
+  --tooltip-color: orange;
+  --arrow-size: 10px;
+  position:absolute;
+  content: "";
+  right: 10%;
+  top: .25rem;
+  transform:  translateY(var(--translate-y, 0)) scale(var(--scale));
+  transition: 100ms transform;
+  transform-origin: top center;
+}
+
+.add-faves-btn::before {
+  --translate-y: calc(100% + var(--arrow-size));
+  content: attr(data-text);
+  font-family: moonlight;
+  padding: .5rem;
+  border-radius: 7px;
+  width: max-content;
+  background: var(--tooltip-color);
+}
+
+.add-faves-btn:hover::before,
+.add-faves-btn:hover::after {
+  --scale: 1;
+}
+
+.add-faves-btn:after {
+  --translate-y: calc(2.5 * var(--arrow-size));
+  content: '';
+  border: var(--arrow-size) solid transparent;
+  border-bottom-color: var(--tooltip-color);
+  transform-origin: bottom center;
+}
+
+.delete-user-fave-btn::before,
+.delete-user-fave-btn::after {
+  --scale: 0;
+  --tooltip-color: orange;
+  --arrow-size: 10px;
+  position:absolute;
+  content: "";
+  right: 10%;
+  top: .25rem;
+  transform: translateY(var(--translate-y, 0)) scale(var(--scale));
+  transition: 100ms transform;
+  transform-origin: top center;
+}
+
+.delete-user-fave-btn::before {
+  --translate-y: calc(100% + var(--arrow-size));
+  content: attr(data-text);
+  font-family: moonlight;
+  padding: .5rem;
+  border-radius: 7px;
+  width: max-content;
+  background: var(--tooltip-color);
+}
+
+.delete-user-fave-btn:hover::before,
+.delete-user-fave-btn:hover::after {
+  --scale: 1;
+}
+
+.delete-user-fave-btn:after {
+  --translate-y: calc(2.5 * var(--arrow-size));
+  content: '';
+  border: var(--arrow-size) solid transparent;
+  border-bottom-color: var(--tooltip-color);
+  transform-origin: bottom center;
+}
+
+
+
+/* Dropdown button functionality */
+
