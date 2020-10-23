@@ -3,13 +3,8 @@ import axios from 'axios';
 import { HiOutlineLogout, HiOutlineUser } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
 import MoviePreviewContainer from '../containers/movies/MoviePreviewContainer';
-import ActionFavesContainer from '../containers/movies/ActionFavesContainer';
-import TrendingPreviewContainer from '../containers/movies/TrendingPreviewContainer';
-import DocuFavesContainer from '../containers/movies/DocuFavesContainer';
-import DramaFavesContainer from '../containers/movies/DramaFavesContainer';
-import SciFiFavesContainer from '../containers/movies/SciFiFavesContainer.js';
-import ThrillerFavesContainer from '../containers/movies/ThrillerFavesContainer';
 import UserFavesContainer from '../containers/movies/UserFavesContainer'
+import AllMovieFavesContainer from '../containers/movies/AllMovieFavesContainer';
 
 const movieAPI = process.env.REACT_APP_MOVIE_KEY
 
@@ -169,12 +164,12 @@ class MoviesPage extends Component {
                 </div>
                 <hr></hr>
                 <div className="user-faves-containers">
-                    <TrendingPreviewContainer trendingMovies={this.state.trendingMovies} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)} genre={"trending"}/>
-                    <ActionFavesContainer actionMovies={this.state.actionMovies} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
-                    <DocuFavesContainer docuMovies={this.state.docuMovies} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
-                    <DramaFavesContainer dramaMovies={this.state.dramaMovies} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
-                    <SciFiFavesContainer scifiMovies={this.state.scifiMovies} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
-                    <ThrillerFavesContainer thrillerMovies={this.state.thrillerMovies} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
+                    <AllMovieFavesContainer movies={this.state.trendingMovies} genre={"trending"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)} genre={"trending"}/>
+                    <AllMovieFavesContainer movies={this.state.actionMovies} genre={"action"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
+                    <AllMovieFavesContainer movies={this.state.docuMovies} genre={"documentary"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
+                    <AllMovieFavesContainer movies={this.state.dramaMovies} genre={"drama & family"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
+                    <AllMovieFavesContainer movies={this.state.scifiMovies} genre={"sci-fi"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
+                    <AllMovieFavesContainer movies={this.state.thrillerMovies} genre={"thriller"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
                 </div>
             </div>
          );
