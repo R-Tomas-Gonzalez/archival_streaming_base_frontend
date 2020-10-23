@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import FavoriteMovieCard from '../components/FavoriteMovieCard'
+import FavoriteMovieCard from '../../components/FavoriteMovieCard'
 
 class DramaFavesContainer extends PureComponent {
     state = {  }
@@ -8,7 +8,7 @@ class DramaFavesContainer extends PureComponent {
             <div className="action-favorites-container">
                 <h2>Drama & Family</h2>
                 <div className="action-card-row">
-                    {this.props.dramaMovies.map((dramaMovie) => <FavoriteMovieCard key={dramaMovie.id} movie={dramaMovie} handleStateClick={this.props.handleStateClick}/>)}
+                    {this.props.dramaMovies.map((dramaMovie) => <FavoriteMovieCard key={dramaMovie.id} movie={dramaMovie} handleStateClick={this.props.handleStateClick} addToFaves={this.props.addToFaves}/>)}
                 </div>
             </div>
          );

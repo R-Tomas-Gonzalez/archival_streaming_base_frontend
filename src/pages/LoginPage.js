@@ -33,6 +33,9 @@ class Home extends PureComponent {
         return ( 
             <Fragment>
                 <div className="login-container-1">
+                    <div className="site-title">
+                        <h1>Archival Streaming Base</h1>
+                    </div>
                     <div className="login-container-2">
                         <div className="registration-container" onClick={() => this.setState({isOpen: true })}>
                             <div className="registration-circle">

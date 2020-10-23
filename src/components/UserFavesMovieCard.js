@@ -1,19 +1,17 @@
 import React from 'react';
-import { FaRegHeart } from "react-icons/fa";
+import { TiDeleteOutline } from "react-icons/ti";
 
-const FavoriteMovieCard = (props) => {
+const UserFavesMovieCard = (props) => {
 
-    // console.log(props)
     const title = props.movie.original_title
     const img = `https://image.tmdb.org/t/p/w300/${props.movie.poster_path}`
-    // const regImg = `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
     
     return (  
         <div className="favorite-column">
             <div className="ui-faves-card" onClick={() => props.handleStateClick(props.movie)}>
                 <div className="faves-card">
                     <img className="faves-image" srcSet={`${img} 1.5x`} alt='movie'/>
-                    <button className="add-faves-btn" data-text="add to faves" onClick={(e) => {e.stopPropagation(); props.addToFaves(props.movie)}}><FaRegHeart size="1.5em"/></button>
+                    <button className="delete-user-fave-btn" data-text="delete from faves" onClick={()=>props.handleDelete(props.movie)}><TiDeleteOutline size="2em"/></button>
                 </div>
                 <div className="faves-card-title">
                     <h3>{title}</h3>
@@ -23,4 +21,4 @@ const FavoriteMovieCard = (props) => {
     );
 }
  
-export default FavoriteMovieCard;
+export default UserFavesMovieCard;

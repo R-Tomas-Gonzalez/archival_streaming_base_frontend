@@ -1,6 +1,8 @@
 import React from 'react';
+import { FaRegHeart } from "react-icons/fa";
 
 const MoviePreviewComponent = (props) => {
+    // console.log(props.movie)
     const backdropImg = `https://image.tmdb.org/t/p/original/${props.movie.backdrop_path}`
     const posterImg = `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
     const title = props.movie.original_title
@@ -21,12 +23,12 @@ const MoviePreviewComponent = (props) => {
                 </div>
                 <div className="title-release">
                     <div className="title"><strong>{title}</strong><span>({release_date})</span></div>
+                    <button className="add-faves-btn-preview" data-text="add to faves" onClick={(e) => {e.stopPropagation(); props.addToFaves(props.movie)}}><FaRegHeart size="1.5em"/></button>
                     <h2>Overview</h2>
                     <div className="overview">{overview}</div>
                 </div>
                 
             </div>
-        
         </div>
      );
 }
