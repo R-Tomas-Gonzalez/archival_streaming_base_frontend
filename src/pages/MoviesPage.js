@@ -34,6 +34,7 @@ class MoviesPage extends Component {
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${movieAPI}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2020&with_genres=10751`),
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${movieAPI}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=878`),
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${movieAPI}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=53`),
+            
             ])
             .then(function (responses){
             return Promise.all(responses.map(function(response){
@@ -53,6 +54,9 @@ class MoviesPage extends Component {
                     return newResults
                 }
             
+                fetch("http://localhost:3001/movie_favorites")
+                    .then(resp=>resp.json())
+                    .then(movieFaves=>this.setUserFaves(movieFaves))
 
             this.setState({
                 trendingMovies: grabMovieInfo(trendingMovieResults),
@@ -65,12 +69,7 @@ class MoviesPage extends Component {
             })
         })
         
-        fetch("http://localhost:3001/movie_favorites")
-        .then(resp=>resp.json())
-        .then(movieFaves=>this.setUserFaves(movieFaves))
     }
-        
-     
 
     handleStateClick = (movie) => {
         this.setState({moviePreview: movie})
@@ -84,9 +83,10 @@ class MoviesPage extends Component {
         })
     }
 
-    addToFaves = (movie, added) => {
+    addToFaves = (movie) => {
+
         // console.log(typeof(this.props.currentUser.id))
-        // console.log(movie)
+        console.log(movie)
         axios.post("http://localhost:3001/movie_favorites",{
             movie_id: movie.id,
             original_title: movie.original_title,
@@ -99,6 +99,7 @@ class MoviesPage extends Component {
         },
         {withCredentials: true})
         .then(response => {if(this.props.currentUser.id === response.data.user_id){
+            console.log(response.data)
                 this.setState({userFaves: [...this.state.userFaves, response.data]})
             }})
     }
@@ -110,6 +111,7 @@ class MoviesPage extends Component {
 
     handleDelete = (movie) => {
         console.log(movie)
+
         fetch(`http://localhost:3001/movie_favorites/${movie.id}`, {
             method: 'DELETE',
             headers: {
@@ -117,7 +119,9 @@ class MoviesPage extends Component {
               'Content-type': 'application/json'
             }
             })
-            this.setState({ userFaves: this.state.userFaves.filter(movieFave => movieFave !== movie)})
+            .then(this.setState({ userFaves: this.state.userFaves.filter(movieFave => movieFave !== movie)}))
+
+        
     }
 
     // this function handles the state

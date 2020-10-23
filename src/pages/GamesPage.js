@@ -8,7 +8,7 @@ import AllGameFavesContainer from '../containers/games/AllGameFavesContainer'
 
 class GamesPage extends PureComponent {
     state = { 
-        gamePreview: [],
+        gamePreview: {},
         trendingGames: [],
         actionGames: [],
         indieGames: [],
@@ -42,6 +42,10 @@ class GamesPage extends PureComponent {
             const rpgGameResults = data[5].results;
             const gamePreviewResults = data[6];
 
+            fetch("http://localhost:3001/game_favorites")
+                .then(resp=>resp.json())
+                .then(gameFaves=>this.setUserFaves(gameFaves))
+
             this.setState({
                 trendingGames: trendingGameResults,
                 actionGames: actionGameResults,
@@ -52,10 +56,6 @@ class GamesPage extends PureComponent {
                 gamePreview: gamePreviewResults
             })
         })
-
-        fetch("http://localhost:3001/game_favorites")
-        .then(resp=>resp.json())
-        .then(gameFaves=>this.setUserFaves(gameFaves))
     }
 
     setUserFaves = (gameFaves) => {
@@ -74,8 +74,7 @@ class GamesPage extends PureComponent {
     }
 
     addToFaves = (game) => {
-        console.log(game)
-        
+
         axios.post("http://localhost:3001/game_favorites", {
             game_id: game.id,
             name: game.name,
@@ -144,7 +143,7 @@ class GamesPage extends PureComponent {
                     </ul>
                 </nav>
                 <div >
-                    {Object.keys(this.state.gamePreview).length === 0 ? <GamePreviewContainer game={this.props.games[1]}/> : <GamePreviewContainer game={this.state.gamePreview}/> }
+                    {Object.keys(this.state.gamePreview).length === 0 ? <GamePreviewContainer game={this.props.games[1]} addToFaves={(game) => this.addToFaves(game)}/> : <GamePreviewContainer game={this.state.gamePreview} addToFaves={(game) => this.addToFaves(game)}/> }
                     <div className="user-favorites-container">
                         <GameFavesContainer currentUser={this.props.currentUser} games={this.state.userFaves} handlePreviewClick={this.handlePreviewClick} handleDelete={this.handleDelete}/>
                     </div>
@@ -157,7 +156,6 @@ class GamesPage extends PureComponent {
                 <AllGameFavesContainer games={this.state.shooterGames} handlePreviewClick={this.handlePreviewClick} addToFaves={(game) => this.addToFaves(game)} genre={"shooter"}/>
                 <AllGameFavesContainer games={this.state.fightingGames} handlePreviewClick={this.handlePreviewClick} addToFaves={(game) => this.addToFaves(game)} genre={"fighting"}/>
                 <AllGameFavesContainer games={this.state.rpgGames} handlePreviewClick={this.handlePreviewClick} addToFaves={(game) => this.addToFaves(game)} genre={"RPG"}/>
-
                 </div>
             </div>
          );

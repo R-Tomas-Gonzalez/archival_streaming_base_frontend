@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import './App.css';
-import Unsplash from 'unsplash-js';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import axios from 'axios';
@@ -13,14 +12,8 @@ import ImagesPage from './pages/ImagesPage';
 
 Modal.setAppElement('#root')
 
+const pixAPI = process.env.REACT_APP_PIX_KEY
 const movieAPI = process.env.REACT_APP_MOVIE_KEY
-const unsplashAPIKey = process.env.REACT_APP_UNSPLASH_KEY
-const unsplashAPISecret = process.env.REACT_APP_UNSPLASH_SECRET
-
-const unsplash = new Unsplash({
-    accessKey: unsplashAPIKey,
-    secret: unsplashAPISecret
-})
 
 class App extends PureComponent {
   state = { 
@@ -37,7 +30,8 @@ class App extends PureComponent {
     Promise.all([
       fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${movieAPI}`),
       fetch("https://api.rawg.io/api/games?platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated"),
-      unsplash.photos.listPhotos( 1, 20)
+      fetch(`https://pixabay.com/api/?key=${pixAPI}&orientation=horizontal&image_type=photo`),
+      // unsplash.photos.listPhotos( 1, 20)
       ])
       .then(function (responses){
       return Promise.all(responses.map(function(response){
@@ -45,13 +39,14 @@ class App extends PureComponent {
       }));
       })
       .then(data => {
+        // console.log(data[2].hits)
       this.setState({
           movies: data[0].results,
           games: data[1].results,
-          photos: data[2]
+          photos: data[2].hits
+        })
       })
-    })
-  }
+    }
 
   handleLogout = () => {
     this.setState({

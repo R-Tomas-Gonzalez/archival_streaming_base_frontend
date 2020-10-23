@@ -4,7 +4,7 @@ import FavoriteMovieCard from '../../components/FavoriteMovieCard'
 class TrendingPreviewContainer extends PureComponent {
     state = {  }
     render() { 
-        // console.log(this.props)
+        console.log(this.props)
         return ( 
             <div className="action-favorites-container">
                 <h2>Trending</h2>
