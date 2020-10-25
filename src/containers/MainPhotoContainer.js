@@ -3,8 +3,7 @@ import MainPhotoCard from '../components/MainPhotoCard'
 
 class MainPhotoContainer extends PureComponent {
 
-    render() { 
-        // console.log(this.props.photos[1])
+    render() {
         return ( 
             <div className="photo-container">
                 <h2>New Images</h2>

@@ -18,7 +18,7 @@ class Home extends PureComponent {
     }
 
     fetchUsers = () => {
-        fetch('http://localhost:3001/users')
+        fetch('https://archival-streaming-base.herokuapp.com/users')
         .then(resp=>resp.json())
         .then(users => {this.setState({users})
         })

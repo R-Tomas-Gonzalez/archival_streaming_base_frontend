@@ -42,7 +42,7 @@ class GamesPage extends PureComponent {
             const rpgGameResults = data[5].results;
             const gamePreviewResults = data[6];
 
-            fetch("http://localhost:3001/game_favorites")
+            fetch("https://archival-streaming-base.herokuapp.com/game_favorites")
                 .then(resp=>resp.json())
                 .then(gameFaves=>this.setUserFaves(gameFaves))
 
@@ -75,7 +75,7 @@ class GamesPage extends PureComponent {
 
     addToFaves = (game) => {
 
-        axios.post("http://localhost:3001/game_favorites", {
+        axios.post("https://archival-streaming-base.herokuapp.com/game_favorites", {
             game_id: game.id,
             name: game.name,
             background_image: game.background_image,
@@ -88,7 +88,7 @@ class GamesPage extends PureComponent {
     }
 
     handleLogoutClick = () => {
-        axios.delete("http://localhost:3001/logout", {withCredentials: true})
+        axios.delete("https://archival-streaming-base.herokuapp.com/logout", {withCredentials: true})
         .then(r => {this.props.handleLogout();})
         .catch(error => {
             console.log("logout error", error)
@@ -96,7 +96,7 @@ class GamesPage extends PureComponent {
     }
 
     handleDelete = (game) => {
-        fetch(`http://localhost:3001/game_favorites/${game.id}`, {
+        fetch(`https://archival-streaming-base.herokuapp.com/game_favorites/${game.id}`, {
             method: 'DELETE',
             headers: {
               Accepts: 'application/json',

@@ -42,7 +42,7 @@ class ImagesPage extends PureComponent {
             const industry = data[4].hits;
             const people = data[5].hits;
 
-            fetch("http://localhost:3001/image_favorites")
+            fetch("https://archival-streaming-base.herokuapp.com/image_favorites")
                 .then(resp=>resp.json())
                 .then(imageFaves=>this.setUserFaves(imageFaves))
 
@@ -63,7 +63,7 @@ class ImagesPage extends PureComponent {
     }
 
     addToFaves = (image) => {
-        axios.post("http://localhost:3001/image_favorites", {
+        axios.post("https://archival-streaming-base.herokuapp.com/image_favorites", {
             image_id: image.id,
             name: image.user,
             image_url: image.largeImageURL,
@@ -85,7 +85,7 @@ class ImagesPage extends PureComponent {
     }
 
     handleDelete = (image) => {
-        fetch(`http://localhost:3001/image_favorites/${image.id}`, {
+        fetch(`https://archival-streaming-base.herokuapp.com/image_favorites/${image.id}`, {
             method: 'DELETE',
             headers: {
               Accepts: 'application/json',
@@ -96,7 +96,7 @@ class ImagesPage extends PureComponent {
     }
 
     handleLogoutClick = () => {
-        axios.delete("http://localhost:3001/logout", {withCredentials: true})
+        axios.delete("https://archival-streaming-base.herokuapp.com/logout", {withCredentials: true})
         .then(r => {this.props.handleLogout();})
         .catch(error => {
             console.log("logout error", error)

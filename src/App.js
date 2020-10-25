@@ -56,7 +56,7 @@ class App extends PureComponent {
   }
  
   checkLoginStatus() {
-    axios.get("http://localhost:3001/logged_in", {withCredentials: true})
+    axios.get("https://archival-streaming-base.herokuapp.com/logged_in", {withCredentials: true})
     .then(resp=>{ if (resp.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN"){
       this.setState({
         loggedInStatus: "LOGGED_IN",

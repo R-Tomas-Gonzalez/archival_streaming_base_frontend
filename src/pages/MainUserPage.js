@@ -12,7 +12,7 @@ class MainUserPage extends PureComponent {
      }
 
     handleLogoutClick = () => {
-        axios.delete("http://localhost:3001/logout", {withCredentials: true})
+        axios.delete("https://archival-streaming-base.herokuapp.com/logout", {withCredentials: true})
         .then(r => {this.props.handleLogout();})
         .catch(error => {
             console.log("logout error", error)

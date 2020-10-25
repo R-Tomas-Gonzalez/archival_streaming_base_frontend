@@ -49,7 +49,7 @@ class MoviesPage extends Component {
                     return newResults
                 }
             
-                fetch("http://localhost:3001/movie_favorites")
+                fetch("https://archival-streaming-base.herokuapp.com/movie_favorites")
                     .then(resp=>resp.json())
                     .then(movieFaves=>this.setUserFaves(movieFaves))
 
@@ -71,7 +71,7 @@ class MoviesPage extends Component {
     }
 
     handleLogoutClick = () => {
-        axios.delete("http://localhost:3001/logout", {withCredentials: true})
+        axios.delete("https://archival-streaming-base.herokuapp.com/logout", {withCredentials: true})
         .then(r => {this.props.handleLogout();})
         .catch(error => {
             console.log("logout error", error)
@@ -82,7 +82,7 @@ class MoviesPage extends Component {
 
         // console.log(typeof(this.props.currentUser.id))
         console.log(movie)
-        axios.post("http://localhost:3001/movie_favorites",{
+        axios.post("https://archival-streaming-base.herokuapp.com/movie_favorites",{
             movie_id: movie.id,
             original_title: movie.original_title,
             overview: movie.overview,
@@ -107,7 +107,7 @@ class MoviesPage extends Component {
     handleDelete = (movie) => {
         console.log(movie)
 
-        fetch(`http://localhost:3001/movie_favorites/${movie.id}`, {
+        fetch(`https://archival-streaming-base.herokuapp.com/movie_favorites/${movie.id}`, {
             method: 'DELETE',
             headers: {
               Accepts: 'application/json',

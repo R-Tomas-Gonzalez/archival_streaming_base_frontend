@@ -8,7 +8,7 @@ class UserBoxComponent extends Component {
     state = {}
 
     handleChange = (userInfo) => {
-        axios.post("http://localhost:3001/sessions", {
+        axios.post("https://archival-streaming-base.herokuapp.com/sessions", {
             user: {
                 email: userInfo.email
             }

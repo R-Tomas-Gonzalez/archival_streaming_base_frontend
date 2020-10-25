@@ -5,7 +5,6 @@ class MoviePreviewContainer extends PureComponent {
     
 
     render() {
-        // console.log(this.props)
         return ( 
             <div>
                 <div className="movie-preview-backdrop">
