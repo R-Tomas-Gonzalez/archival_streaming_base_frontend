@@ -164,7 +164,7 @@ class MoviesPage extends Component {
                 </div>
                 <hr></hr>
                 <div className="user-faves-containers">
-                    <AllMovieFavesContainer movies={this.state.trendingMovies} genre={"trending"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)} genre={"trending"}/>
+                    <AllMovieFavesContainer movies={this.state.trendingMovies} genre={"trending"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
                     <AllMovieFavesContainer movies={this.state.actionMovies} genre={"action"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
                     <AllMovieFavesContainer movies={this.state.docuMovies} genre={"documentary"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>
                     <AllMovieFavesContainer movies={this.state.dramaMovies} genre={"drama & family"} handleStateClick={this.handleStateClick} addToFaves={(movie) => this.addToFaves(movie)}/>

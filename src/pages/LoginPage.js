@@ -3,6 +3,7 @@ import React, { Fragment, PureComponent } from 'react';
 import { HiOutlineUserAdd } from 'react-icons/hi';
 import RegistrationModal from '../components/RegistrationModal'
 import RegistrationComponent from '../auth/RegistrationComponent'
+import {PulseLoader} from 'react-spinners'
 
 // Pages 
 import UserContainer from '../containers/UserContainer'
@@ -48,14 +49,18 @@ class Home extends PureComponent {
                     <RegistrationModal open={this.state.isOpen} onClose={() => this.setState({isOpen: false})}>
                         <RegistrationComponent to="/" onClick={() => this.setState({isOpen: false})} handleSuccessfulAuth={this.handleSuccessfulAuth}/>
                     </RegistrationModal>
-                        
                         {this.state.users.length ? 
                         <Fragment>
                             <div className="login-container-3">
                                 <UserContainer userInfo={this.state.users} handleSuccessfulAuth={this.handleSuccessfulAuth} />
                             </div> 
                         </Fragment>
-                        : null }
+                        : 
+                        <div className="login-container-3">
+                            <div className="user-row">
+                                <PulseLoader loading size={30} color="white"/>
+                            </div> 
+                        </div>}
                     </div>
                 </div>
             </Fragment>
