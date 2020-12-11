@@ -56,8 +56,11 @@ class App extends PureComponent {
   }
  
   checkLoginStatus() {
+
     axios.get("https://archival-streaming-base.herokuapp.com/logged_in", {withCredentials: true})
-    .then(resp=>{ if (resp.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN"){
+    // .then(resp => console.log(resp))
+    .then(resp=>
+      {if (resp.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN"){
       this.setState({
         loggedInStatus: "LOGGED_IN",
         user: resp.data.user
@@ -80,9 +83,11 @@ class App extends PureComponent {
   }
 
   render() {
+    
     return ( 
       <div className="App-background">
         <div className="App">
+          {/* {console.log(this.state)} */}
           <BrowserRouter>
           <Switch>
             <Route 
