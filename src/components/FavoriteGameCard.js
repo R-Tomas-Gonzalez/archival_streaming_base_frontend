@@ -3,7 +3,6 @@ import { FaRegHeart } from "react-icons/fa";
 
 
 const FavoriteGameCard = (props) => {
-// console.log(props)
     const image = props.game.background_image
     const title = props.game.name
 

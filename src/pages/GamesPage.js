@@ -6,6 +6,8 @@ import GamePreviewContainer from '../containers/games/GamePreviewContainer';
 import GameFavesContainer from '../containers/games/GameFavesContainer';
 import AllGameFavesContainer from '../containers/games/AllGameFavesContainer'
 
+const gameAPI = process.env.REACT_APP_GAME_KEY
+
 class GamesPage extends PureComponent {
     state = { 
         gamePreview: {},
@@ -20,20 +22,20 @@ class GamesPage extends PureComponent {
 
     componentDidMount = () => {
         Promise.all([
-            fetch("https://api.rawg.io/api/games?platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated"),
-            fetch("https://api.rawg.io/api/games?genres=4&dates=2019-01-01,2020-11-01"),
-            fetch("https://api.rawg.io/api/games?genres=51&dates=2019-01-01,2020-11-01"),
-            fetch("https://api.rawg.io/api/games?genres=2&dates=2019-01-01,2020-11-01"),
-            fetch("https://api.rawg.io/api/games?genres=6&dates=2019-01-01,2020-11-01"),
-            fetch("https://api.rawg.io/api/games?genres=5&dates=2019-01-01,2020-11-01"),
-            fetch("https://api.rawg.io/api/games/51325")
+            fetch(`https://api.rawg.io/api/games?key=${gameAPI}&platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated`),
+            fetch(`https://api.rawg.io/api/games?key=${gameAPI}&genres=4&dates=2019-01-01,2020-11-01`),
+            fetch(`https://api.rawg.io/api/games?key=${gameAPI}&genres=51&dates=2019-01-01,2020-11-01`),
+            fetch(`https://api.rawg.io/api/games?key=${gameAPI}&genres=2&dates=2019-01-01,2020-11-01`),
+            fetch(`https://api.rawg.io/api/games?key=${gameAPI}&genres=6&dates=2019-01-01,2020-11-01`),
+            fetch(`https://api.rawg.io/api/games?key=${gameAPI}&genres=5&dates=2019-01-01,2020-11-01`),
+            fetch(`https://api.rawg.io/api/games/51325?key=${gameAPI}`),
         ])
         .then(function (response){
             return Promise.all(response.map(function (response){
                 return response.json();
             }));
         })
-        .then(data => { 
+        .then(data => {
             const trendingGameResults = data[0].results;
             const actionGameResults = data[1].results;
             const indieGameResults = data[2].results;
@@ -66,7 +68,7 @@ class GamesPage extends PureComponent {
     handlePreviewClick = (game) => {
         const id = game.game_id ? parseInt(game.game_id) : game.id 
         
-        fetch(`https://api.rawg.io/api/games/${id}`)
+        fetch(`https://api.rawg.io/api/games/${id}?key=${gameAPI}`)
         .then(resp=>resp.json())
         .then(game => this.setState({gamePreview: game}))
 
@@ -107,6 +109,7 @@ class GamesPage extends PureComponent {
     }
 
     render() {
+        
         return ( 
             <div className="wrapper">
                 <nav>

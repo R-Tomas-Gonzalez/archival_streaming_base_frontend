@@ -8,7 +8,7 @@ class UserBoxComponent extends Component {
     state = {}
 
     handleChange = (userInfo) => {
-        axios.post("https://archival-streaming-base.herokuapp.com/sessions", {
+        axios.post(/*"http://localhost:3001/sessions"*/"https://archival-streaming-base.herokuapp.com/sessions", {
             user: {
                 email: userInfo.email
             }
@@ -16,7 +16,7 @@ class UserBoxComponent extends Component {
         { withCredentials: true }
         )
         .then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.data.logged_in){
                 this.props.handleSuccessfulAuth(response.data);
             }

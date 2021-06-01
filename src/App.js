@@ -14,6 +14,7 @@ Modal.setAppElement('#root')
 
 const pixAPI = process.env.REACT_APP_PIX_KEY
 const movieAPI = process.env.REACT_APP_MOVIE_KEY
+const gameAPI = process.env.REACT_APP_GAME_KEY
 
 class App extends PureComponent {
   state = { 
@@ -29,7 +30,7 @@ class App extends PureComponent {
 
     Promise.all([
       fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${movieAPI}`),
-      fetch("https://api.rawg.io/api/games?platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated"),
+      fetch(`https://api.rawg.io/api/games?key=${gameAPI}&platforms=1,18&dates=2020-01-01,2020-11-01&ordering=rated`),
       fetch(`https://pixabay.com/api/?key=${pixAPI}&orientation=horizontal&image_type=photo`),
       // unsplash.photos.listPhotos( 1, 20)
       ])
@@ -39,7 +40,6 @@ class App extends PureComponent {
       }));
       })
       .then(data => {
-        // console.log(data[2].hits)
       this.setState({
           movies: data[0].results,
           games: data[1].results,
@@ -57,7 +57,7 @@ class App extends PureComponent {
  
   checkLoginStatus() {
 
-    axios.get("https://archival-streaming-base.herokuapp.com/logged_in", {withCredentials: true})
+    axios.get(/*"http://localhost:3001/logged_in"*/"https://archival-streaming-base.herokuapp.com/logged_in", {withCredentials: true})
     // .then(resp => console.log(resp))
     .then(resp=>
       {if (resp.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN"){

@@ -7,6 +7,7 @@ class GamePreviewComponent extends PureComponent {
     
 
     render () {
+        // console.log(this.props.game)
         const allClips = this.props.game.clip
         const clip = allClips ? allClips.clip : null
         const title = this.props.game.name
